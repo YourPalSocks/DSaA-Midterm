@@ -7,6 +7,11 @@ LinkedList<ItemType>::LinkedList() : headPtr(nullptr), itemCount(0)
 }
 
 template<class ItemType>
+LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList) : headPtr(aList.headPtr), itemCount(aList.itemCount)
+{
+}
+
+template<class ItemType>
 LinkedList<ItemType>::~LinkedList()
 {
 	clear();
@@ -89,10 +94,42 @@ bool LinkedList<ItemType>::remove(int pos)
 }
 
 template<class ItemType>
+bool LinkedList<ItemType>::isEmpty() const
+{
+	if (itemCount != 0)
+	{
+		return false;
+	}
+	return true;
+}
+
+template<class ItemType>
 void LinkedList<ItemType>::clear()
 {
 	while (!isEmpty())
 	{
 		remove(1);
+	}
+}
+
+template<class ItemType>
+int LinkedList<ItemType>::getLength() const
+{
+	return itemCount;
+}
+
+template<class ItemType>
+void LinkedList<ItemType>::setEntry(int pos, const ItemType& newEntry) throw(PrecondViolationExcep)
+{
+	bool ableToSet = (pos >= 1) && (pos <= itemCount);
+	if (ableToSet)
+	{
+		getNodeAt(pos)->setItem(newEntry);
+	}
+	else
+	{
+		string message = "setEntry() called with an empty list or ";
+		message += "invalid position.";
+		throw(PrecondViolationExcep(message));
 	}
 }

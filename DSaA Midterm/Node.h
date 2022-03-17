@@ -5,6 +5,9 @@
 #pragma once
 #ifndef _NODE
 #define _NODE
+
+#include <string>
+using namespace std;
 template <class ItemType>
 class Node
 {
@@ -21,6 +24,7 @@ public:
 	ItemType getItem() const;
 	Node<ItemType>* getNext() const;
 };
-
-
 #endif
+template class Node<float>;
+template class Node<int>;
+template class Node<string>;
